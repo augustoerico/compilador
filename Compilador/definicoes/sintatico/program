@@ -1,0 +1,7 @@
+0 1 2 3 4 *5
+program begin end
+0 program 1
+1 <declaration_section> 2
+2 begin 3
+3 <command_section> 4
+4 end 5

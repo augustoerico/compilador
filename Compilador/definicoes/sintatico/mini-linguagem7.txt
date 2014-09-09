@@ -1,0 +1,29 @@
+﻿program = "program" declaration_section "begin" command_section "end" .
+
+
+declaration_section = { ( 
+                        ( "macro" "id" "number" ) | 
+                        ( "id" [ "[" numeric_expression "]" ] ) | 
+                        ( "define" "id" "(" [ ( "id" [ "[" "]" ] ) { "," ( "id" [ "[" "]" ] ) } ] ")" 
+                            ( "procedure" declaration_section "begin" command_section "return" numeric_expression ";" "end" ) ) ";" 
+                        ) } .
+
+
+command_section = { ( 
+                    ( "id" [ "[" numeric_expression "]" ] "=" numeric_expression ";" ) | 
+                    ( "id" [ "[" numeric_expression "]" ] "="  "call" "id" "(" [ numeric_expression {"," numeric_expression } ] ")" ";" ) | 
+                    ( "while" boolean_expression "{" command_section "}" ) | 
+                    ( "if" "(" boolean_expression ")" "{" command_section "}" [ "else" "{" command_section "}" ] ) | 
+                    ( "input" | "output" "id" [ "[" numeric_expression "]" ] ";" ) 
+                    ) } .
+
+
+numeric_expression = ( "-" numeric_expression ) | 
+                        ( "(" numeric_expression ")" ) | 
+                        ( ( "id" [ "[" numeric_expression "]" ] [ ( "+" | "-" | "*" | "/" | "^" ) numeric_expression ] ) | 
+                            "number" [ ( "+" | "-" | "*" | "/" | "^" ) numeric_expression ] ) .
+
+
+
+
+boolean_expression = "true" | "false" | ( numeric_expression ( ">" | "<" | "==" | "!=" | ">=" | "<=" ) numeric_expression ) .

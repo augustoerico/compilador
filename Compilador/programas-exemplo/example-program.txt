@@ -1,0 +1,62 @@
+﻿program
+        integer i;
+        integer[5] j;
+        integer[3][3] matrix;
+        boolean b;
+        char[12] hello;
+        char a;
+        
+        integer sum(integer a, integer b) 
+                procedure
+                begin
+                        return (a + b);
+                end
+        ;
+        
+        void multiply(integer x, integer** matrix, integer size)
+                procedure
+                        integer i;
+                        integer j;
+                begin
+                        i = 0;
+                        j = 0;
+                        while(i < size)
+                        {
+                                while(j < size)
+                                {
+                                        matrix[i][j] = matrix[i][j]*x;
+                                        j = j + 1;
+                                }
+                                i = i + 1;
+                        }
+                end
+        ;
+        
+        begin
+        
+                b = false;
+                
+                i = 0;
+                while(i < 5)
+                {
+                        j[i] = i;
+                        i = i + 1;
+                }
+                
+                if(5 > 2)
+                {
+                        j[0] = 10;
+                }
+                
+                if(b && true)
+                {
+                        j[1] = 777;
+                } else {
+                        j[1] = 123;
+                        j[2] = 321;
+                }
+                
+                hello = "hello, world\0";
+                a = 'a';
+                
+        end

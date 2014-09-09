@@ -1,0 +1,21 @@
+﻿6 *7 8 9 10 11 12 13
+epsilon term n.term ( ) [ ] { }
+6 epsilon 7
+6 term 7
+6 n.term 7
+6 ( 8
+6 [ 10
+6 { 12
+7 | 6
+7 epsilon 7
+7 term 7
+7 n.term 7
+7 ( 8
+7 [ 10
+7 { 12
+8 <EXPR> 9
+10 <EXPR> 11
+12 <EXPR> 13
+9 ) 7
+11 ] 7
+13 } 7

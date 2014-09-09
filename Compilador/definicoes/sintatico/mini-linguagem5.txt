@@ -1,0 +1,49 @@
+﻿program = "program" declaration_section "begin" command_section "end" .
+
+
+declaration_section = { declaration } .
+declaration = ( constant_declaration | variable_declaration | procedure_declaration ) ";" .
+
+
+constant_declaration = "macro" "id" "number" .
+
+
+variable_declaration = "id" [ "[" numeric_expression "]" ] .
+
+
+procedure_declaration = "define" "id" "(" parameter_list ")" procedure .
+parameter_list = [ parameter { "," parameter } ] .
+parameter = "id" [ "[" "]" ] .
+procedure = "procedure" declaration_section "begin" command_section [ return_command ] "end" .
+
+
+return_command = "return" numeric_expression ";" .
+
+
+command_section = { command }
+command = assignment_command | call_command | loop_command | if_command | io_command .
+
+
+call_command = "id" [ "[" numeric_expression "]" ] "="  "id" "(" [ numeric_expression {"," numeric_expression } ] ")" ";" .
+
+
+numeric_expression = ( "-" numeric_expression ) | ( "(" numeric_expression ")" ) | ( ( "id" [ numeric_operator numeric_expression ] ) | "number" [ numeric_operator numeric_expression ] ) .
+
+
+numeric_operator =  "+" | "-" | "*" | "/" | "^" .
+
+
+boolean_expression = ( "(" boolean_expression ")" ) | "true" | "false" | ( numeric_expression comparison_operator numeric_expression ) .
+comparison_operator = ">" | "<" | "==" | "!=" | ">=" | "<=" .
+
+
+assignment_command = "id" [ "[" numeric_expression "]" ] "=" numeric_expression ";" .
+
+
+loop_command = "while" boolean_expression "{" command_section "}" .
+
+
+if_command = "if" "(" boolean_expression ")" "{" command_section "}" [ "else" "{" command_section "}" ] .
+
+
+io_command = "input" | "output" variable_declaration ";" .

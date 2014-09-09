@@ -1,0 +1,66 @@
+﻿program = "program" declaration_section "begin" command_section "end" .
+
+
+
+
+declaration_section = { declaration } .
+declaration = ( variable_declaration | procedure_declaration ) ";" .
+
+
+
+
+variable_declaration = var_type "id" .
+var_type = ( "int" | "bool" | "char" ) { "[" "number" "]" } .
+
+
+
+
+procedure_declaration = return_type "id" "(" parameter_list ")" procedure .
+
+
+
+
+return_type = ( "int" | "bool" | "char" | "void" ) .
+parameter_list = [ parameter { "," parameter } ] .
+parameter = var_type { "*" } "id" .
+procedure = "procedure" declaration_section "begin" command_section "end" .
+
+
+
+
+command_section = { command }
+command = assignment_command | call_command | loop_command | if_command .
+
+
+
+
+call_command = [ "id" = ] "id" "(" [ expression {"," expression } ] ")" ";" .
+expression = ( "id" [ ( boolean_operator boolean_expression ) | ( numeric_operator numeric_expression ) ] ) | char_expression | boolean_expression | numeric_expression | ( "(" expression ")" ) .
+
+
+
+
+char_expression = "character" .
+
+
+
+
+numeric_expression = "id" | "number" | ( numeric_expression numeric_operator numeric_expression ) .
+numeric_operator =  "+" | "-" | "*" | "/" .
+
+
+
+
+boolean_expression = ( "!" [ "(" boolean_expression ")" ] ) | "id" | "true" | "false" | ( boolean_expression boolean_operator boolean_expression ) | ( numeric_expression comparison_operator numeric_expression ) .
+boolean_operator = "&" | "|"
+comparison_operator = ">" | "<" | "==" | "!=" | ">=" | "<=" .
+
+
+
+
+assignment_command = "id" { "[" numeric_expression "]" } "=" expression ";" .
+
+
+
+
+loop_command = "while" boolean_expression "{" command_section "}" .
