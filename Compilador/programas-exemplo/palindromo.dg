@@ -1,16 +1,16 @@
 program
 
-    int n;
-    int reverse;
-    bool result;
-    int temp;
+    n;
+    reverse;
+    result;
+    temp;
     
 begin
 
 	n	=1234321;
     temp=   n;
     
-    while(temp!=0)
+    while temp!=	0
     {
         reverse = reverse *10;
         reverse= reverse+temp%10;
@@ -18,9 +18,6 @@ begin
     }
     
     if (n == reverse) {
-        result = true;
-    } else {
-        result = false;
-    }
+        output n;
     
 end

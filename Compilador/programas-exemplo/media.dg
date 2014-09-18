@@ -1,0 +1,47 @@
+# Given a list of integers (inteiros) calculates their mean values #
+
+program
+    
+    macro MAX 10;
+    inteiros[MAX];
+    i;
+    media;
+    
+    # Function that does the trick #
+    define calcula_media(vetor[], n)
+    procedure
+       
+        i;
+        acumulador;
+        media;
+
+    begin
+
+        acumulador = 0;
+        
+        i = 0;
+        while i < n {
+
+            acumulador = acumulador + vetor[i];
+            i = i + 1;
+
+        }
+
+        return acumulador/n;
+    end;
+
+begin
+
+    # Initializes the vector #
+    i = 0;
+    while i < MAX {
+
+        inteiros[i] = -(i*2);
+        i = i + 1;
+    }
+
+    # Calls function #
+    media = call calcula_media(inteiros[], MAX);
+    output media;
+
+end
