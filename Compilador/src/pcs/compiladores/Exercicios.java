@@ -18,7 +18,7 @@ public final class Exercicios {
 	public static void exercicio2(){
 		System.out.println("Exercicio 2");
 		AnalisadorLexico analisador = new AnalisadorLexico("defC.txt", "defC-reserv.txt");
-		analisador.carregaTabelaSimbolos("exercicio1.txt");
+		analisador.tabelaTokens("exercicio1.txt");
 		analisador.imprime();
 	}
 	
@@ -51,7 +51,7 @@ public final class Exercicios {
 	public static void exercicio5_2(){
 		System.out.println("Exercicio 5 - 2");
 		AnalisadorLexico analisador = new AnalisadorLexico("defWirth.txt", "defWirth-reserv.txt");
-		analisador.carregaTabelaSimbolos("exercicio5.txt");
+		analisador.tabelaTokens("exercicio5.txt");
 		analisador.imprime();
 	}
 	
@@ -75,25 +75,25 @@ public final class Exercicios {
 		System.out.println(trans.avaliaCadeia("TI I<>N9I)"));
 	}
 	
-	public static void testeRotinas(){
-		System.out.println("Teste Rotinas");
-		String[] nomes = new String[2];
-		String[] nomes2 = new String[2];
-		nomes[0] = "GRAM.txt";
-		nomes[1] = "EXPR.txt";
-		nomes2[0] = "GRAM-RS.txt";
-		nomes2[1] = "EXPR-RS.txt";
-		
-		TransdutorFinito transdutor = new TransdutorFinito("defWirth.txt");
-		
-		Vector<String[]> tabelaTokens = transdutor.extraiTokensArq("testeRotinas.txt");
-		String[] elem = new String[2];
-		for(ListIterator<String[]> it = tabelaTokens.listIterator(); it.hasNext();){
-			elem = it.next();
-			System.out.format("%10s: <%s>\n", elem[0], elem[1]);
-		}
-		
-		AutomatoPilha automato = new AutomatoPilha(nomes, nomes2);
-		System.out.println(automato.avaliaTokens(tabelaTokens));
-	}
+//	public static void testeRotinas(){
+//		System.out.println("Teste Rotinas");
+//		String[] nomes = new String[2];
+//		String[] nomes2 = new String[2];
+//		nomes[0] = "GRAM.txt";
+//		nomes[1] = "EXPR.txt";
+//		nomes2[0] = "GRAM-RS.txt";
+//		nomes2[1] = "EXPR-RS.txt";
+//		
+//		TransdutorFinito transdutor = new TransdutorFinito("defWirth.txt");
+//		
+//		Vector<String[]> tabelaTokens = transdutor.extraiTokensArq("testeRotinas.txt");
+//		String[] elem = new String[2];
+//		for(ListIterator<String[]> it = tabelaTokens.listIterator(); it.hasNext();){
+//			elem = it.next();
+//			System.out.format("%10s: <%s>\n", elem[0], elem[1]);
+//		}
+//		
+//		AutomatoPilha automato = new AutomatoPilha(nomes, nomes2);
+//		System.out.println(automato.avaliaTokens(tabelaTokens));
+//	}
 }
