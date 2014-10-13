@@ -1,0 +1,30 @@
+*6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27
+macro id number ; id [ ] define ( ) , procedure begin return end
+6   macro   7
+7   id      8
+8   number  9
+9   ;       6
+6   id      10
+10  ;       6
+10  [       11
+11  <numeric_expression>    12
+12  ]       10
+6   define  13
+13  id      14
+14  (       15
+15  )       19
+15  id      16
+16  [       17
+17  ]       16
+16  ,       18
+18  id      16
+16  )       19
+19  procedure   20
+20  <declaration_section>   21
+21  begin   22
+22  <command_section>       23
+23  return  24
+24  <numeric_expression>    25
+25  ;       26
+26  end     27
+27  ;       6

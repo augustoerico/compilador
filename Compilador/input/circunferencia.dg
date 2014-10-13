@@ -1,0 +1,8 @@
+program
+    macro PI 3;
+    raio;
+    comprimento;
+begin
+    raio = 2;
+    comprimento = 2*PI*raio;
+end
