@@ -222,26 +222,28 @@ public class TransdutorFinito {
 			if(this.transicoes.containsKey(this.estadoAtual)){
 				if(this.transicoes.get(this.estadoAtual).containsKey("branco")){
 					proximoEstado = this.transicoes.get(this.estadoAtual).get("branco");
-					System.out.println("<" + this.estadoAtual + ",branco," + proximoEstado + ">");
+					// System.out.println("<" + this.estadoAtual + ",branco," + proximoEstado + ">");
+					Logger.transicao(this.estadoAtual, "branco", proximoEstado);
 					this.estadoAtual = proximoEstado;
 					return true;
 				} else if(this.transicoes.get(this.estadoAtual).containsKey("outros")){
 					proximoEstado = this.transicoes.get(this.estadoAtual).get("outros");
-					System.out.println("<" + this.estadoAtual + ",outros," + proximoEstado + ">");
+					// System.out.println("<" + this.estadoAtual + ",outros," + proximoEstado + ">");
+					Logger.transicao(this.estadoAtual, "outros", proximoEstado);
 					this.estadoAtual = proximoEstado;
 					return true;
-				} else {
+				} /*else {
 					// System.out.println("Erro 005: Transicao invalida: <" + this.estadoAtual + ",branco>");
 					// Estado atual não faz transição com 'branco'; retorno para estado inicial
 					System.out.println("(005) Transicao invalida: <" + this.estadoAtual + ", branco>");
 					System.out.println("Retorno para estado inicial.");
-				}
-			} else {
+				}*/
+			} /*else {
 				// System.out.println("Erro 006: Estado de origem \"" + this.estadoAtual + "\" nao faz transicao");
 				// Estado atual não faz nenhuma transição; retorno para estado inicial
 				System.out.println("(006) Estado de origem nao faz transicao: \"" + this.estadoAtual + "\"");
 				System.out.println("Retorno para estado inicial.");
-			}
+			}*/
 			return false;
 		}
 		
@@ -254,28 +256,30 @@ public class TransdutorFinito {
 		if(this.transicoes.containsKey(this.estadoAtual)){
 			if(this.transicoes.get(this.estadoAtual).containsKey(a)){
 				proximoEstado = this.transicoes.get(this.estadoAtual).get(a);
-				System.out.println("<" + this.estadoAtual + "," + a + "," + proximoEstado + ">");
+				// System.out.println("<" + this.estadoAtual + "," + a + "," + proximoEstado + ">");
+				Logger.transicao(this.estadoAtual, a, proximoEstado);
 				this.estadoAtual = proximoEstado;
 				return true;
 			} else {
 				if(this.transicoes.get(this.estadoAtual).containsKey("outros")){
 					proximoEstado = this.transicoes.get(this.estadoAtual).get("outros");
-					System.out.println("<" + this.estadoAtual + ",outros," + proximoEstado + ">");
+					// System.out.println("<" + this.estadoAtual + ",outros," + proximoEstado + ">");
+					Logger.transicao(this.estadoAtual, "outros", proximoEstado);
 					this.estadoAtual = proximoEstado;
 					return true;
-				} else {
+				} /*else {
 					// System.out.println("Erro 003: Transicao invalida: <" + this.estadoAtual + "," + a + ">");
 					// Estado atual não faz transição com token atual; retorno para estado inicial
 					System.out.println("(003) Transicao invalida: " + "<" + this.estadoAtual + "," + a + ">");
 					System.out.println("Retorno para estado inicial.");
-				}
+				}*/
 			}
-		} else {
+		} /*else {
 			// System.out.println("Erro 002: Estado de origem \"" + this.estadoAtual + "\" nao faz transicao");
 			// Estado atual não faz nenhuma transição; retorno para estado inicial
 			System.out.println("(002) Estado de origem nao faz transicao: \"" + this.estadoAtual + "\"");
 			System.out.println("Retorno para estado inicial.");
-		}
+		}*/
 		return false;
 	}
 	

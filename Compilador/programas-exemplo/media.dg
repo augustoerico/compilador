@@ -41,7 +41,7 @@ begin
     }
 
     # Calls function #
-    media = call calcula_media(inteiros[], MAX);
+    media = call calcula_media(inteiros, MAX);
     output media;
 
 end

@@ -11,12 +11,14 @@ public class Submaquina extends TransdutorFinito{
 	// Submaquina comum, sem rotinas semânticas
 	public Submaquina(String nomeArquivo){
 		super(nomeArquivo);
-		int posicaoPonto = nomeArquivo.indexOf('.');
+		
+		File f = new File(nomeArquivo);
+		int posicaoPonto = f.getName().indexOf('.');
 		
 		if(posicaoPonto != -1){
-			this.id = new File(nomeArquivo).getName().substring(0, posicaoPonto);
+			this.id = f.getName().substring(0, posicaoPonto);
 		} else {
-			this.id = new File(nomeArquivo).getName();
+			this.id = f.getName();
 		}
 	}
 

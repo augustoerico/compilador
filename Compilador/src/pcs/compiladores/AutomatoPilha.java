@@ -1,5 +1,6 @@
 package pcs.compiladores;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
 import java.util.Vector;
@@ -11,6 +12,32 @@ public class AutomatoPilha {
 	protected Submaquina submaquinaAtual;
 	
 	public AutomatoPilha(String[] nomeArquivos){
+		
+		Submaquina submaquina;
+		String id;
+		submaquinas = new HashMap<String, Submaquina>();
+		
+		boolean first = true;
+		for(String f : nomeArquivos){
+			submaquina = new Submaquina(f);
+			
+			id = submaquina.getId();
+			if(first){
+				// A primeira maquina carregada é a principal
+				this.submaquinaPrincipal = id;
+				first = !first;
+			}
+			if (!submaquinas.containsKey(id)){
+				submaquinas.put(id, submaquina);
+			}
+		}
+		
+		// Inicialização
+		pilha = new Stack<String[]>();
+		submaquinaAtual = submaquinas.get(submaquinaPrincipal);
+	}
+	
+public AutomatoPilha(ArrayList<String> nomeArquivos){
 		
 		Submaquina submaquina;
 		String id;
@@ -72,7 +99,7 @@ public class AutomatoPilha {
 		while(i < size){
 			String[] token = tokens.get(i); // token[0]: valor -> auxilia o Analisador Semântico
 											// token[1]: tipo -> trabalha com o Analisador Sintático
-			System.out.format("<%1s> %3s %3s      \n", submaquinaAtual.getId(),submaquinaAtual.getEstadoAtual(), token[0]);
+			// System.out.format("<%1s> %3s %3s      \n", submaquinaAtual.getId(),submaquinaAtual.getEstadoAtual(), token[0]);
 			
 			resultTransicao = submaquinaAtual.fazTransicao(token[1]);
 			if(!resultTransicao){
@@ -84,7 +111,7 @@ public class AutomatoPilha {
 					// Empilha
 					pilha.push(elemPilha);
 					
-					System.out.println("Chamada de Submaquina");
+					Logger.chamadaSubmaquina(elemPilha[2]);
 					
 					// Chamada de Submaquina
 					submaquinaAtual = submaquinas.get(elemPilha[2]);
@@ -100,7 +127,7 @@ public class AutomatoPilha {
 						submaquinaAtual = submaquinas.get(elemPilha[0]);
 						submaquinaAtual.setEstadoAtual(elemPilha[1]);
 						
-						System.out.println("Desempilha");
+						Logger.retornoSubmaquina(elemPilha[2]);
 					} else {
 						// Não é possível desempilhar => estado de rejeição
 						return false;

@@ -16,9 +16,9 @@ public class Compilador {
 //		Teste.testeAnalisadorLexico("definicoes/lexico/doge2.lx", 
 //				"definicoes/palavras-reservadas/doge2.pr", 
 //				"programas-exemplo/palindromo.dg");
-		Teste.sintaxe("/definicoes/lexico/doge2.lx", 
-				"/definicoes/palavras-reservadas/doge2.pr", 
-				"/programas-exemplo/media.dg",
-				"/resultados/palindromo2.lx-res");
+//		Teste.sintaxe("/definicoes/lexico/doge2.lx", 
+//				"/definicoes/palavras-reservadas/doge2.pr", 
+//				"/programas-exemplo/media.dg");
+		Teste.sintaxe("/home/erico/poli_workspace/compilador/Compilador/input", "media.dg");
 	}
 }

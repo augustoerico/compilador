@@ -38,11 +38,13 @@ public class AnalisadorLexico extends TransdutorFinito{
 		Vector<String[]> tokens = this.extraiTokensArq(fonteArq);
 		Vector<String[]> toRemove = new Vector<String[]>();
 		
+		Logger.newLine();
+		
 		for(String[] e : tokens){
 			// System.out.println(e[0] + ", " + e[1]);
 			if(e[1].equals(Constantes.COMENTARIO)){
 				// Remove comment
-				System.out.println("Comentario ignorado: " + e[0]);
+				// System.out.println("Comentario ignorado: " + e[0]);
 				toRemove.add(e);
 			} else {
 				if(palavrasReservadas.contains(e[0])){
@@ -68,7 +70,7 @@ public class AnalisadorLexico extends TransdutorFinito{
 					}
 					e[1] = Constantes.NUMERO;
 				} 
-				System.out.println(e[0] + ", " + e[1]);
+				// System.out.println(e[0] + ", " + e[1]);
 			}
 			
 		}
