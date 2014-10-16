@@ -135,4 +135,64 @@ public final class Teste {
 		
 		System.out.printf("Teste concluído.\n");
 	}
+	
+	public static void chamadaRotinasSemanticas(String inputPath, String fonte){
+		
+		if(inputPath.isEmpty()){
+			inputPath = System.getProperty("user.dir").concat(Constantes.DEFAULT_INPUT_DIR);
+		}
+		
+		fonte = inputPath + File.separator + fonte;
+		
+		// Inicialização default
+		String lexico = "doge2.lx";
+		String palavrasReservadas = "doge2.pr";
+		String sintaticoRaiz = "";
+		ArrayList<String> sintatico = new ArrayList<String>();
+		
+		File dir = new File(inputPath);
+		for(String f : dir.list()){
+			
+			if(f.endsWith(Constantes.LEXICO)){
+				lexico = inputPath + File.separator + f;
+			} else if(f.endsWith(Constantes.PALAVRAS_RESERV)){
+				palavrasReservadas = inputPath + File.separator + f;
+			} else if(f.endsWith(Constantes.SINTATICO_RAIZ)){
+				sintaticoRaiz = inputPath + File.separator + f;
+			} else if(f.endsWith(Constantes.SINTATICO)){
+				sintatico.add(inputPath + File.separator + f);
+			}
+		}		
+		
+		if(sintaticoRaiz.isEmpty()){
+			System.err.println("Sintatico Raiz não encontrado. O arquivo "
+					+ "deve ter extensão " + Constantes.SINTATICO_RAIZ +".");
+			return ;
+		}
+		sintatico.add(0, sintaticoRaiz);
+		
+		String[] definicoesLex = {lexico, palavrasReservadas};
+		
+		// Léxico
+		Logger.cabecalho("Analisador Léxico");
+		Logger.definicoes(definicoesLex);
+		Logger.pathCodigoFonte(fonte);
+		AnalisadorLexico al = new AnalisadorLexico(lexico, palavrasReservadas);
+		System.out.println("- Transições:");
+		Vector<String[]> tabelaTokens = al.tabelaTokens(fonte);
+		
+		Logger.tabelaTokens(tabelaTokens);
+		
+		// Sintático
+		
+		Logger.cabecalho("Analisador Sintático");
+		Logger.definicoes(sintatico);
+		AutomatoPilha ap = new AutomatoPilha(sintatico);
+		
+		// System.out.println(ap.avaliaTokens(tabelaTokens));
+		Logger.resultadoSintatico(ap.avaliaTokens(tabelaTokens));
+		
+		System.out.printf("Teste concluído.\n");
+		
+	}
 }

@@ -2,6 +2,7 @@ package pcs.compiladores;
 
 public class Constantes {
 	
+	// Tokens genéricos do léxico
 	public static String COMENTARIO = "#";
 	public static String BRANCO = "branco";
 	public static String NUMERO = "number";
@@ -15,6 +16,7 @@ public class Constantes {
 	public static String PALAVRAS_RESERV = ".pr";
 	public static String SINTATICO = ".st";
 	public static String SINTATICO_RAIZ = ".strz";
+	public static String ROTINA_SEMANTICA = ".rs";
 	
 	// Defaults de sistema
 	public static String DEFAULT_INPUT_DIR = "/input";

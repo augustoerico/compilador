@@ -62,4 +62,7 @@ public class Logger {
 	public static void resultadoSintatico(boolean resultado){
 		System.out.println("\nLinguagem " + ( resultado ? "" : "não " ) + "reconhecida.");
 	}
+	public static void rotinaSemantica(String rotinaSemantica){
+		System.out.println("\n\t--- Rotina semantica: " + rotinaSemantica + "\n");
+	}
 }

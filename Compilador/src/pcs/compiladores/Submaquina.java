@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 // public class Submaquina extends TransdutorFinito{
-public class Submaquina extends TransdutorFinito{
+public class Submaquina extends TransdutorFinitoRS{
 	private String id; // nome único da submáquina
 	
 	// Submaquina comum, sem rotinas semânticas
@@ -21,19 +21,6 @@ public class Submaquina extends TransdutorFinito{
 			this.id = f.getName();
 		}
 	}
-
-//	// Submaquina com rotinas semânticas
-//	public Submaquina(String nomeArquivo1, String nomeArquivo2){
-//		super(nomeArquivo1, nomeArquivo2);
-//		
-//		int posicaoPonto = nomeArquivo1.indexOf('.');
-//		
-//		if(posicaoPonto != -1){
-//			this.id = nomeArquivo1.substring(0, posicaoPonto);
-//		} else {
-//			this.id = nomeArquivo1;
-//		}
-//
 	
 	public String getId() {
 		return id;

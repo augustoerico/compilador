@@ -48,8 +48,10 @@ public AutomatoPilha(ArrayList<String> nomeArquivos){
 			submaquina = new Submaquina(f);
 			
 			id = submaquina.getId();
+			// FIXME ao invés de usar a flag "first", retirar o primeiro elemento (pop) e depois fazer o loop
 			if(first){
 				// A primeira maquina carregada é a principal
+				/// FIXME poderia ser a última (usando pop)
 				this.submaquinaPrincipal = id;
 				first = !first;
 			}
@@ -63,7 +65,18 @@ public AutomatoPilha(ArrayList<String> nomeArquivos){
 		submaquinaAtual = submaquinas.get(submaquinaPrincipal);
 	}
 	
-/*	public AutomatoPilha(String[] nomeArquivos, String[] nomeArquivos2){
+//	public AutomatoPilha(String idSintaticoRaiz, ArrayList<DefinicaoSubmaquina> defSubmaquina){ 
+//		
+//		Submaquina submaquina;
+//		
+//		for(DefinicaoSubmaquina ds : defSubmaquina){
+//			// submaquina = new Submaquina();
+//		}
+//	}
+	
+	/*
+	public AutomatoPilha(ArrayList<String> nomeArquivos, ArrayList<String> nomeArquivos2){
+			
 		int i = 0;
 		Submaquina submaquina;
 		String id;
@@ -75,7 +88,7 @@ public AutomatoPilha(ArrayList<String> nomeArquivos){
 			
 			if(i == 0)
 				// A primeira máquina carregada é a principal
-				this.submaquinaPrincipal = id;
+			this.submaquinaPrincipal = id;
 			if(!submaquinas.containsKey(id))
 				submaquinas.put(id, submaquina);
 			i++;
@@ -84,7 +97,8 @@ public AutomatoPilha(ArrayList<String> nomeArquivos){
 		// Inicialização
 		pilha = new Stack<String[]>();
 		submaquinaAtual = submaquinas.get(submaquinaPrincipal);
-	}*/
+	}
+	*/
 	
 	public Submaquina getSubmaquinaAtual(){
 		return submaquinaAtual;

@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class TransdutorFinitoOP extends TransdutorFinito{
+public class TransdutorFinitoRS extends TransdutorFinito{
 	
 	/**
 	 * Tabela de transições e rotinas semânticas correspondentes
@@ -12,13 +12,13 @@ public class TransdutorFinitoOP extends TransdutorFinito{
 	 */
 	private HashMap<String, HashMap<String, String>> transRotinas;
 	
-	public TransdutorFinitoOP(String nomeArquivo1, String nomeArquivo2){
+	public TransdutorFinitoRS(String nomeArquivo1, String nomeArquivo2){
 		super(nomeArquivo1);
 		carregaRotinas(nomeArquivo2);
 	}
 	
 	// Construtor para TransdutorFinito comum, sem rotinas semânticas
-	public TransdutorFinitoOP(String nomeArquivo1){
+	public TransdutorFinitoRS(String nomeArquivo1){
 		super(nomeArquivo1);
 		this.transRotinas = null;
 	}
@@ -62,33 +62,54 @@ public class TransdutorFinitoOP extends TransdutorFinito{
 		// Whitespace é o caso especial, já que ele é usado para separar argumentos da descrição do autômato
 		if(Character.isWhitespace(c)){
 			if(this.transicoes.containsKey(this.estadoAtual)){
-				if(this.transicoes.get(this.estadoAtual).containsKey("branco")){
-					proximoEstado = this.transicoes.get(this.estadoAtual).get("branco");
-					// System.out.println("<" + this.estadoAtual + ",branco," + proximoEstado + ">");
+				if(this.transicoes.get(this.estadoAtual).containsKey(Constantes.BRANCO)){
+					
+					proximoEstado = this.transicoes.get(this.estadoAtual).get(Constantes.BRANCO);
+					Logger.transicao(this.estadoAtual, "branco", proximoEstado);
+					
 					try{
 						idRotinaSemantica = this.transRotinas.get(this.estadoAtual).get(proximoEstado);
+						Logger.rotinaSemantica(idRotinaSemantica);
+						// TODO inserir chamada de rotina semântica aqui
+						
 					} catch(NullPointerException e) {
-						idRotinaSemantica = "";
+						idRotinaSemantica = ""; // FIXME
 					}
-					System.out.println("Rotina Semantica: " + idRotinaSemantica);
+					
 					this.estadoAtual = proximoEstado;
+					
 					return true;
+					
 				} else if(this.transicoes.get(this.estadoAtual).containsKey("outros")){
+
 					proximoEstado = this.transicoes.get(this.estadoAtual).get("outros");
-					// System.out.println("<" + this.estadoAtual + ",outros," + proximoEstado + ">");
+					Logger.transicao(this.estadoAtual, "outros", proximoEstado);
+					
 					try{
 						idRotinaSemantica = this.transRotinas.get(this.estadoAtual).get(proximoEstado);
+						Logger.rotinaSemantica(idRotinaSemantica);
+						// TODO inserir chamada de rotina semântica aqui
 					} catch(NullPointerException e) {
-						idRotinaSemantica = "";
+						idRotinaSemantica = ""; // FIXME
 					}
-					System.out.println("Rotina Semantica: " + idRotinaSemantica);
+					
 					this.estadoAtual = proximoEstado;
+					
 					return true;
+					
 				} else {
-					System.out.println("Erro 005: Transicao invalida: <" + this.estadoAtual + ",branco>");
+					
+					if(!this.estadosFinais.contains(this.estadoAtual)){						
+						System.out.println("Erro 005: Transicao invalida: <" + this.estadoAtual + ",branco>"); // FIXME Logger
+					}
+					
 				}
 			} else {
-				System.out.println("Erro 006: Estado de origem \"" + this.estadoAtual + "\" nao faz transicao");
+				
+				if(!this.estadosFinais.contains(this.estadoAtual)){					
+					System.out.println("Erro 006: Estado de origem \"" + this.estadoAtual + "\" nao faz transicao"); // FIXME Logger
+				}
+				
 			}
 			return false;
 		}
@@ -101,35 +122,55 @@ public class TransdutorFinitoOP extends TransdutorFinito{
 		String idRotinaSemantica;
 		
 		if(this.transicoes.containsKey(this.estadoAtual)){
+
 			if(this.transicoes.get(this.estadoAtual).containsKey(a)){
+				
 				proximoEstado = this.transicoes.get(this.estadoAtual).get(a);
-				// System.out.println("<" + this.estadoAtual + "," + a + "," + proximoEstado + ">");
+				Logger.transicao(this.estadoAtual, "branco", proximoEstado);
+			
 				try{
 					idRotinaSemantica = this.transRotinas.get(this.estadoAtual).get(proximoEstado);
+					Logger.rotinaSemantica(idRotinaSemantica);
+					// TODO inserir chamada da rotina semântica aqui
 				} catch(NullPointerException e) {
 					idRotinaSemantica = "";
 				}
-				System.out.println("Rotina Semantica: " + idRotinaSemantica);
+				
 				this.estadoAtual = proximoEstado;
+				
 				return true;
+				
 			} else {
+				
 				if(this.transicoes.get(this.estadoAtual).containsKey("outros")){
+				
 					proximoEstado = this.transicoes.get(this.estadoAtual).get("outros");
-					// System.out.println("<" + this.estadoAtual + ",outros," + proximoEstado + ">");
+					Logger.transicao(this.estadoAtual, "outros", proximoEstado);
+					
 					try{
 						idRotinaSemantica = this.transRotinas.get(this.estadoAtual).get(proximoEstado);
+						Logger.rotinaSemantica(idRotinaSemantica);
+						// TODO inserir chamada de rotina semântica aqui
 					} catch(NullPointerException e) {
-						idRotinaSemantica = "";
+						idRotinaSemantica = ""; // FIXME esta chamada é necessária?
 					}
-					System.out.println("Rotina Semantica: " + idRotinaSemantica);
+					
 					this.estadoAtual = proximoEstado;
+					
 					return true;
-				} else {
-					// System.out.println("Erro 003: Transicao invalida: <" + this.estadoAtual + "," + a + ">");
-				}
+				} // TODO colocar este erro em outro lugar; aqui, o autômato ainda pode fazer uma chamada de submaquina e prosseguir
+				/*else {
+					
+					if(!this.estadosFinais.contains(this.estadoAtual)){
+						System.out.println("Erro 003: Transicao invalida: <" + this.estadoAtual + "," + a + ">"); // FIXME Logger
+					}
+				}*/
 			}
 		} else {
-			System.out.println("Erro 002: Estado de origem \"" +  this.estadoAtual + "\" nao faz transicao");
+			
+			if(!this.estadosFinais.contains(this.estadoAtual)){				
+				System.out.println("Erro 002: Estado de origem \"" +  this.estadoAtual + "\" nao faz transicao"); // FIXME Logger
+			}
 		}
 		return false;
 	}
