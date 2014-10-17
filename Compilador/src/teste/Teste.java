@@ -6,6 +6,7 @@ import java.util.Vector;
 
 import pcs.compiladores.AnalisadorLexico;
 import pcs.compiladores.AutomatoPilha;
+import pcs.compiladores.DefinicaoSubmaquina;
 import pcs.compiladores.Logger;
 import pcs.compiladores.Constantes;
 
@@ -148,7 +149,9 @@ public final class Teste {
 		String lexico = "doge2.lx";
 		String palavrasReservadas = "doge2.pr";
 		String sintaticoRaiz = "";
+		String idSintaticoRaiz = "";
 		ArrayList<String> sintatico = new ArrayList<String>();
+		ArrayList<String> semantico = new ArrayList<String>();
 		
 		File dir = new File(inputPath);
 		for(String f : dir.list()){
@@ -159,8 +162,11 @@ public final class Teste {
 				palavrasReservadas = inputPath + File.separator + f;
 			} else if(f.endsWith(Constantes.SINTATICO_RAIZ)){
 				sintaticoRaiz = inputPath + File.separator + f;
+				idSintaticoRaiz = f.substring(0, f.length() - Constantes.SINTATICO_RAIZ.length());
 			} else if(f.endsWith(Constantes.SINTATICO)){
 				sintatico.add(inputPath + File.separator + f);
+			} else if(f.endsWith(Constantes.ROTINA_SEMANTICA)){
+				semantico.add(inputPath + File.separator + f);
 			}
 		}		
 		
@@ -169,7 +175,7 @@ public final class Teste {
 					+ "deve ter extensão " + Constantes.SINTATICO_RAIZ +".");
 			return ;
 		}
-		sintatico.add(0, sintaticoRaiz);
+		sintatico.add(sintaticoRaiz);
 		
 		String[] definicoesLex = {lexico, palavrasReservadas};
 		
@@ -183,13 +189,16 @@ public final class Teste {
 		
 		Logger.tabelaTokens(tabelaTokens);
 		
-		// Sintático
+		// Sintático com Rotinas Semânticas
 		
-		Logger.cabecalho("Analisador Sintático");
+		Logger.cabecalho("Analisador Sintático com Rotinas Semânticas");
 		Logger.definicoes(sintatico);
-		AutomatoPilha ap = new AutomatoPilha(sintatico);
+		Logger.definicoes(semantico);
 		
-		// System.out.println(ap.avaliaTokens(tabelaTokens));
+		DefinicaoSubmaquina.getListaDefinicaoSubmaquina(sintatico, semantico);
+		AutomatoPilha ap = new AutomatoPilha(idSintaticoRaiz, 
+				DefinicaoSubmaquina.getListaDefinicaoSubmaquina(sintatico, semantico));
+		
 		Logger.resultadoSintatico(ap.avaliaTokens(tabelaTokens));
 		
 		System.out.printf("Teste concluído.\n");

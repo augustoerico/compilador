@@ -52,11 +52,12 @@ public class Logger {
 	}
 	
 	public static void chamadaSubmaquina(String id){
-		System.out.println("\t--- Chamada de Submaquina: " + id);
+		System.out.println("\n\t>>> Chamada de Submaquina: " + id);
 	}
 	
 	public static void retornoSubmaquina(String id){
-		System.out.println("\t--- Retorno de Submaquina: " + id);
+		System.out.println("\t<<< Retorno de Submaquina: " + id);
+		System.out.println();
 	}
 	
 	public static void resultadoSintatico(boolean resultado){
@@ -64,5 +65,9 @@ public class Logger {
 	}
 	public static void rotinaSemantica(String rotinaSemantica){
 		System.out.println("\n\t--- Rotina semantica: " + rotinaSemantica + "\n");
+	}
+	
+	public static void rotinaNaoDefinida(String idRotina){
+		System.out.println("\n\tError: Rotina " + idRotina + " não está definida.\n");
 	}
 }

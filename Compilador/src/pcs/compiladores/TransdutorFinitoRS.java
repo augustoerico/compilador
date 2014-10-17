@@ -14,7 +14,9 @@ public class TransdutorFinitoRS extends TransdutorFinito{
 	
 	public TransdutorFinitoRS(String nomeArquivo1, String nomeArquivo2){
 		super(nomeArquivo1);
-		carregaRotinas(nomeArquivo2);
+		if(!nomeArquivo2.isEmpty()){			
+			carregaRotinas(nomeArquivo2);
+		}
 	}
 	
 	// Construtor para TransdutorFinito comum, sem rotinas semânticas
@@ -37,6 +39,7 @@ public class TransdutorFinitoRS extends TransdutorFinito{
 				carregaTransRotina(linha);
 				linha = inputStream.readLine();
 			}
+			inputStream.close();
 		} catch(IOException e) {
 			System.out.println("Erro 001: Abertura do arquivo \"" + nomeArquivo + "\"");
 			e.getMessage();
@@ -126,7 +129,7 @@ public class TransdutorFinitoRS extends TransdutorFinito{
 			if(this.transicoes.get(this.estadoAtual).containsKey(a)){
 				
 				proximoEstado = this.transicoes.get(this.estadoAtual).get(a);
-				Logger.transicao(this.estadoAtual, "branco", proximoEstado);
+				Logger.transicao(this.estadoAtual, a, proximoEstado);
 			
 				try{
 					idRotinaSemantica = this.transRotinas.get(this.estadoAtual).get(proximoEstado);
@@ -173,9 +176,5 @@ public class TransdutorFinitoRS extends TransdutorFinito{
 			}
 		}
 		return false;
-	}
-	
-	public void selecionaRotinaSemantica(String rotina){
-		
 	}
 }

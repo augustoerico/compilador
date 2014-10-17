@@ -22,6 +22,22 @@ public class Submaquina extends TransdutorFinitoRS{
 		}
 	}
 	
+	// Submaquina com rotinas semanticas
+	public Submaquina(DefinicaoSubmaquina definicaoSubmaquina){
+		
+		super(definicaoSubmaquina.getDefinicaoSintatica(), 
+				definicaoSubmaquina.getDefinicaoSemantica());
+	
+		File f = new File(definicaoSubmaquina.getDefinicaoSintatica());
+		int posicaoPonto = f.getName().indexOf('.');
+		
+		if(posicaoPonto != -1){
+			this.id = f.getName().substring(0, posicaoPonto);
+		} else {
+			this.id = f.getName();
+		}		
+	}
+	
 	public String getId() {
 		return id;
 	}

@@ -19,6 +19,7 @@ public class Compilador {
 //		Teste.sintaxe("/definicoes/lexico/doge2.lx", 
 //				"/definicoes/palavras-reservadas/doge2.pr", 
 //				"/programas-exemplo/media.dg");
-		Teste.sintaxe("/home/erico/poli_workspace/compilador/Compilador/input", "media.dg");
+//		Teste.sintaxe("/home/erico/poli_workspace/compilador/Compilador/input", "media.dg");
+		Teste.chamadaRotinasSemanticas("/home/erico/poli_workspace/compilador/Compilador/input", "media.dg");
 	}
 }

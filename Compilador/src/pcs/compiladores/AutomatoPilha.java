@@ -65,14 +65,28 @@ public AutomatoPilha(ArrayList<String> nomeArquivos){
 		submaquinaAtual = submaquinas.get(submaquinaPrincipal);
 	}
 	
-//	public AutomatoPilha(String idSintaticoRaiz, ArrayList<DefinicaoSubmaquina> defSubmaquina){ 
-//		
-//		Submaquina submaquina;
-//		
-//		for(DefinicaoSubmaquina ds : defSubmaquina){
-//			// submaquina = new Submaquina();
-//		}
-//	}
+	public AutomatoPilha(String idSintaticoRaiz, ArrayList<DefinicaoSubmaquina> defSubmaquina){ 
+		
+		this.submaquinas = new HashMap<String, Submaquina>();
+		this.submaquinaPrincipal = idSintaticoRaiz;
+
+		Submaquina submaquina;
+		String id;
+		
+		for(DefinicaoSubmaquina ds : defSubmaquina){
+			
+			submaquina = new Submaquina(ds);	
+			id = submaquina.getId();
+			
+			if(!submaquinas.containsKey(id)){
+				submaquinas.put(id, submaquina);
+			}
+		}
+		
+		// Inicialização
+		pilha = new Stack<String[]>();
+		submaquinaAtual = submaquinas.get(submaquinaPrincipal);
+	}
 	
 	/*
 	public AutomatoPilha(ArrayList<String> nomeArquivos, ArrayList<String> nomeArquivos2){
