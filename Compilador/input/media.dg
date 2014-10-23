@@ -2,8 +2,7 @@
 
 program
     
-    macro MAX 10;
-    inteiros[MAX];
+    inteiros[10];
     i;
     media;
     

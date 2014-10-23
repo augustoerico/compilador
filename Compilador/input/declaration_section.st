@@ -1,4 +1,4 @@
-*6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27
+*6 7 8 9 10 11 12 12a 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27
 macro id number ; id [ ] define ( ) , procedure begin return end
 6   macro   7
 7   id      8
@@ -7,8 +7,9 @@ macro id number ; id [ ] define ( ) , procedure begin return end
 6   id      10
 10  ;       6
 10  [       11
-11  <numeric_expression>    12
-12  ]       10
+11  number  12
+12  ]       12a
+12a ;		6
 6   define  13
 13  id      14
 14  (       15

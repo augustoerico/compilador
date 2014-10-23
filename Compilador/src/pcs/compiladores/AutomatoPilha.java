@@ -88,32 +88,6 @@ public AutomatoPilha(ArrayList<String> nomeArquivos){
 		submaquinaAtual = submaquinas.get(submaquinaPrincipal);
 	}
 	
-	/*
-	public AutomatoPilha(ArrayList<String> nomeArquivos, ArrayList<String> nomeArquivos2){
-			
-		int i = 0;
-		Submaquina submaquina;
-		String id;
-		
-		submaquinas = new HashMap<String, Submaquina>();
-		while(i < nomeArquivos.length){
-			submaquina = new Submaquina(nomeArquivos[i], nomeArquivos2[i]);
-			id = submaquina.getId();
-			
-			if(i == 0)
-				// A primeira máquina carregada é a principal
-			this.submaquinaPrincipal = id;
-			if(!submaquinas.containsKey(id))
-				submaquinas.put(id, submaquina);
-			i++;
-		}
-		
-		// Inicialização
-		pilha = new Stack<String[]>();
-		submaquinaAtual = submaquinas.get(submaquinaPrincipal);
-	}
-	*/
-	
 	public Submaquina getSubmaquinaAtual(){
 		return submaquinaAtual;
 	}
@@ -127,9 +101,9 @@ public AutomatoPilha(ArrayList<String> nomeArquivos){
 		while(i < size){
 			String[] token = tokens.get(i); // token[0]: valor -> auxilia o Analisador Semântico
 											// token[1]: tipo -> trabalha com o Analisador Sintático
-			// System.out.format("<%1s> %3s %3s      \n", submaquinaAtual.getId(),submaquinaAtual.getEstadoAtual(), token[0]);
 			
-			resultTransicao = submaquinaAtual.fazTransicao(token[1]);
+			// resultTransicao = submaquinaAtual.fazTransicao(token[1]); // TODO remove-me
+			resultTransicao = submaquinaAtual.fazTransicao(token);
 			if(!resultTransicao){
 				elemPilha = new String[3];
 				elemPilha = submaquinaAtual.chamaSubmaquina();	// elemPilha[0]: ID da submáquina corrente

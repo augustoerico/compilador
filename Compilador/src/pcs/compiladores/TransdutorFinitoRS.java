@@ -177,4 +177,41 @@ public class TransdutorFinitoRS extends TransdutorFinito{
 		}
 		return false;
 	}
+	
+	public boolean fazTransicao(String[] token){
+		// TODO: (legado) tomar coragem e criar a classe "Token"
+		// token[0]: valor -> auxilia o Analisador Semântico
+		// token[1]: tipo -> trabalha com o Analisador Sintático
+		
+		String proximoEstado;
+		String idRotinaSemantica;
+		RotinasSemanticas rs = new RotinasSemanticas();
+		
+		if(this.transicoes.containsKey(this.estadoAtual)){
+
+			if(this.transicoes.get(this.estadoAtual).containsKey(token[1])){
+				
+				proximoEstado = this.transicoes.get(this.estadoAtual).get(token[1]);
+				Logger.transicao(this.estadoAtual, token[1], proximoEstado);
+			
+				try{
+					idRotinaSemantica = this.transRotinas.get(this.estadoAtual).get(proximoEstado);
+					Logger.rotinaSemantica(idRotinaSemantica);
+					rs.disparaRotina(idRotinaSemantica, token);
+				} catch(NullPointerException e) {
+					idRotinaSemantica = "";
+				}
+				
+				this.estadoAtual = proximoEstado;
+				
+				return true;
+				
+			} // TODO colocar este erro em outro lugar; aqui é possível fazer chamada de submaquina
+			/*else if(!this.estadosFinais.contains(this.estadoAtual)){
+				System.out.println("Erro 002: Estado de origem \"" +  this.estadoAtual + "\" nao faz transicao"); // FIXME Logger
+			}*/ 
+		}
+		return false;
+		
+	}
 }

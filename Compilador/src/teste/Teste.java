@@ -204,4 +204,72 @@ public final class Teste {
 		System.out.printf("Teste concluído.\n");
 		
 	}
+	
+	public static void chamadaRotinasSemanticas2(String inputPath, String fonte){
+		
+		if(inputPath.isEmpty()){
+			inputPath = System.getProperty("user.dir").concat(Constantes.DEFAULT_INPUT_DIR);
+		}
+		
+		fonte = inputPath + File.separator + fonte;
+		
+		// Inicialização default
+		String lexico = "doge2.lx";
+		String palavrasReservadas = "doge2.pr";
+		String sintaticoRaiz = "";
+		String idSintaticoRaiz = "";
+		ArrayList<String> sintatico = new ArrayList<String>();
+		ArrayList<String> semantico = new ArrayList<String>();
+		
+		File dir = new File(inputPath);
+		for(String f : dir.list()){
+			
+			if(f.endsWith(Constantes.LEXICO)){
+				lexico = inputPath + File.separator + f;
+			} else if(f.endsWith(Constantes.PALAVRAS_RESERV)){
+				palavrasReservadas = inputPath + File.separator + f;
+			} else if(f.endsWith(Constantes.SINTATICO_RAIZ)){
+				sintaticoRaiz = inputPath + File.separator + f;
+				idSintaticoRaiz = f.substring(0, f.length() - Constantes.SINTATICO_RAIZ.length());
+			} else if(f.endsWith(Constantes.SINTATICO)){
+				sintatico.add(inputPath + File.separator + f);
+			} else if(f.endsWith(Constantes.ROTINA_SEMANTICA)){
+				semantico.add(inputPath + File.separator + f);
+			}
+		}		
+		
+		if(sintaticoRaiz.isEmpty()){
+			System.err.println("Sintatico Raiz não encontrado. O arquivo "
+					+ "deve ter extensão " + Constantes.SINTATICO_RAIZ +".");
+			return ;
+		}
+		sintatico.add(sintaticoRaiz);
+		
+		String[] definicoesLex = {lexico, palavrasReservadas};
+		
+		// Léxico
+		Logger.cabecalho("Analisador Léxico");
+		Logger.definicoes(definicoesLex);
+		Logger.pathCodigoFonte(fonte);
+		AnalisadorLexico al = new AnalisadorLexico(lexico, palavrasReservadas);
+		System.out.println("- Transições:");
+		Vector<String[]> tabelaTokens = al.tabelaTokens(fonte);
+		
+		Logger.tabelaTokens(tabelaTokens);
+		
+		// Sintático com Rotinas Semânticas
+		
+		Logger.cabecalho("Analisador Sintático com Rotinas Semânticas");
+		Logger.definicoes(sintatico);
+		Logger.definicoes(semantico);
+		
+		DefinicaoSubmaquina.getListaDefinicaoSubmaquina(sintatico, semantico);
+		AutomatoPilha ap = new AutomatoPilha(idSintaticoRaiz, 
+				DefinicaoSubmaquina.getListaDefinicaoSubmaquina(sintatico, semantico));
+		
+		Logger.resultadoSintatico(ap.avaliaTokens(tabelaTokens));
+		
+		System.out.printf("Teste concluído.\n");
+		
+	}
 }
