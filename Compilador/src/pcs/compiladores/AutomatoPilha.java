@@ -102,7 +102,6 @@ public AutomatoPilha(ArrayList<String> nomeArquivos){
 			String[] token = tokens.get(i); // token[0]: valor -> auxilia o Analisador Semântico
 											// token[1]: tipo -> trabalha com o Analisador Sintático
 			
-			// resultTransicao = submaquinaAtual.fazTransicao(token[1]); // TODO remove-me
 			resultTransicao = submaquinaAtual.fazTransicao(token);
 			if(!resultTransicao){
 				elemPilha = new String[3];

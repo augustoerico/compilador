@@ -70,4 +70,16 @@ public class Logger {
 	public static void rotinaNaoDefinida(String idRotina){
 		System.out.println("\n\tError: Rotina " + idRotina + " não está definida.\n");
 	}
+	
+	public static void variavelTemporaria(String nomeVariavel, int valor){
+		System.out.println("\t\t| " + nomeVariavel + ": " + valor);
+	}
+	
+	public static void variavelTemporaria(String nomeVariavel, String valor){
+		System.out.println("\t\t| " + nomeVariavel + ": " + valor);
+	}
+	
+	public static void quebraLinha(){
+		System.out.println();
+	}
 }

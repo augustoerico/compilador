@@ -55,19 +55,28 @@ public class RotinasSemanticas {
 	}
 	
 	private void DS2(String[] token){
-		this.contador = tamanho + 1;
+		// this.contador = tamanho + 1;
+		this.contador += 1;
 		LinhaTabelaSimbolos linha = new LinhaTabelaSimbolos(nome, endereco,
 										tamanho, tipo);
 		this.tabela.put(nome, linha);
+		
+		Logger.variavelTemporaria("nome", nome);
+		Logger.variavelTemporaria("endereco", endereco);
+		Logger.variavelTemporaria("tamanho", tamanho);
+		Logger.variavelTemporaria("tipo", tipo.toString());
+		Logger.quebraLinha();
 	}
 	
 	private void DS3(String[] token){
 		
 		try{
 			this.tamanho = Integer.parseInt(token[0]);
+			this.contador += tamanho;
 		} catch(NumberFormatException e){
 			try{
 				this.tamanho = Integer.parseInt(token[0], 16);
+				this.contador += tamanho;
 			} catch(NumberFormatException ex){
 				this.tamanho = 1; // TODO: criar um erro no log mais elaborado
 				ex.printStackTrace();

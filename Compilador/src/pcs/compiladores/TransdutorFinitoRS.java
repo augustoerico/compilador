@@ -11,6 +11,7 @@ public class TransdutorFinitoRS extends TransdutorFinito{
 	 * (Estado Atual, Próximo Estado): ID da Rotina Semântica
 	 */
 	private HashMap<String, HashMap<String, String>> transRotinas;
+	private RotinasSemanticas rotinasSemanticas = new RotinasSemanticas();
 	
 	public TransdutorFinitoRS(String nomeArquivo1, String nomeArquivo2){
 		super(nomeArquivo1);
@@ -72,9 +73,10 @@ public class TransdutorFinitoRS extends TransdutorFinito{
 					
 					try{
 						idRotinaSemantica = this.transRotinas.get(this.estadoAtual).get(proximoEstado);
-						Logger.rotinaSemantica(idRotinaSemantica);
-						// TODO inserir chamada de rotina semântica aqui
-						
+						if(idRotinaSemantica != null){							
+							Logger.rotinaSemantica(idRotinaSemantica);
+							// TODO inserir chamada de rotina semântica aqui
+						}						
 					} catch(NullPointerException e) {
 						idRotinaSemantica = ""; // FIXME
 					}
@@ -90,8 +92,10 @@ public class TransdutorFinitoRS extends TransdutorFinito{
 					
 					try{
 						idRotinaSemantica = this.transRotinas.get(this.estadoAtual).get(proximoEstado);
-						Logger.rotinaSemantica(idRotinaSemantica);
-						// TODO inserir chamada de rotina semântica aqui
+						if(idRotinaSemantica != null){
+							Logger.rotinaSemantica(idRotinaSemantica);
+							// TODO inserir chamada de rotina semântica aqui
+						}
 					} catch(NullPointerException e) {
 						idRotinaSemantica = ""; // FIXME
 					}
@@ -133,8 +137,10 @@ public class TransdutorFinitoRS extends TransdutorFinito{
 			
 				try{
 					idRotinaSemantica = this.transRotinas.get(this.estadoAtual).get(proximoEstado);
-					Logger.rotinaSemantica(idRotinaSemantica);
-					// TODO inserir chamada da rotina semântica aqui
+					if(idRotinaSemantica != null){						
+						Logger.rotinaSemantica(idRotinaSemantica);
+						// TODO inserir chamada da rotina semântica aqui
+					}
 				} catch(NullPointerException e) {
 					idRotinaSemantica = "";
 				}
@@ -152,8 +158,10 @@ public class TransdutorFinitoRS extends TransdutorFinito{
 					
 					try{
 						idRotinaSemantica = this.transRotinas.get(this.estadoAtual).get(proximoEstado);
-						Logger.rotinaSemantica(idRotinaSemantica);
-						// TODO inserir chamada de rotina semântica aqui
+						if(idRotinaSemantica != null){							
+							Logger.rotinaSemantica(idRotinaSemantica);
+							// TODO inserir chamada de rotina semântica aqui
+						}
 					} catch(NullPointerException e) {
 						idRotinaSemantica = ""; // FIXME esta chamada é necessária?
 					}
@@ -185,7 +193,7 @@ public class TransdutorFinitoRS extends TransdutorFinito{
 		
 		String proximoEstado;
 		String idRotinaSemantica;
-		RotinasSemanticas rs = new RotinasSemanticas();
+		// RotinasSemanticas rs = new RotinasSemanticas();
 		
 		if(this.transicoes.containsKey(this.estadoAtual)){
 
@@ -196,8 +204,10 @@ public class TransdutorFinitoRS extends TransdutorFinito{
 			
 				try{
 					idRotinaSemantica = this.transRotinas.get(this.estadoAtual).get(proximoEstado);
-					Logger.rotinaSemantica(idRotinaSemantica);
-					rs.disparaRotina(idRotinaSemantica, token);
+					if(idRotinaSemantica != null){						
+						Logger.rotinaSemantica(idRotinaSemantica);
+						rotinasSemanticas.disparaRotina(idRotinaSemantica, token);
+					}
 				} catch(NullPointerException e) {
 					idRotinaSemantica = "";
 				}
